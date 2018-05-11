@@ -72,6 +72,8 @@ public class TowerController : MonoBehaviour
     private void DestoryTower()
     {
 
+        StopAllCoroutines();
+
         for (int i = 0; i < towerPieces.Count; i += 1)
         {
 
