@@ -68,8 +68,8 @@ public class TowerController : MonoBehaviour
 
     }
 
-    [ContextMenu("DestoryTower")]
-    private void DestoryTower()
+    [ContextMenu("DestroyTower")]
+    private void DestroyTower()
     {
 
         StopAllCoroutines();
