@@ -3,18 +3,44 @@
 public class HandController : MonoBehaviour
 {
 
+    [SerializeField] private TowerController towerController;
+
+    private bool canPickupItem = false;
+
+    private GameObject item;
+
+    private void Update()
+    {
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+
+        if (other.gameObject.name.Contains("Bucket") && canPickupItem && item == null)
+        {
+
+            item = other.gameObject.GetComponent<BucketController>().GrabItem(gameObject.transform);
+
+        }
+
+    }
+
     public void ReleaseItem()
     {
 
-        GameObject item = gameObject.transform.Find("Item").gameObject;
+        if (item)
+        {
 
-        Rigidbody itemRigidbody = item.GetComponent<Rigidbody>();
-        Rigidbody handRigidbody = gameObject.transform.GetComponent<Rigidbody>();
+            Rigidbody itemRigidbody = item.GetComponent<Rigidbody>();
 
-        itemRigidbody.isKinematic = false;
+            item.transform.SetParent(null);
 
-        itemRigidbody.velocity = handRigidbody.velocity;
-        itemRigidbody.angularVelocity = handRigidbody.angularVelocity;
+            itemRigidbody.isKinematic = false;
+
+            item = null;
+
+        }
 
     }
 

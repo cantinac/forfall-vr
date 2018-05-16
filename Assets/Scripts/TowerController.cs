@@ -18,24 +18,11 @@ public class TowerController : MonoBehaviour
 
     private List<GameObject> towerPieces = new List<GameObject>();
 
+    private WaitForSeconds delayBetweenPlacingPiece = new WaitForSeconds(0.05f);
+
     private Coroutine generateTower;
 
     private void Start()
-    {
-
-        InitGenerateTower();
-
-    }
-
-    [ContextMenu("InitGenerateTower")]
-    private void InitGenerateTower()
-    {
-
-        StartCoroutine("GenerateTower");
-
-    }
-
-    public IEnumerator GenerateTower()
     {
 
         float currentYOffset = 0.5f;
@@ -56,9 +43,9 @@ public class TowerController : MonoBehaviour
 
                 GameObject jengaPiece = Instantiate(jengaPiecePrefab, jengaPiecePosition, jenaPieceRotation);
 
-                towerPieces.Add(jengaPiece);
+                jengaPiece.SetActive(false);
 
-                yield return new WaitForSeconds(0.1f);
+                towerPieces.Add(jengaPiece);
 
             }
 
@@ -66,10 +53,36 @@ public class TowerController : MonoBehaviour
 
         }
 
+        InitGenerateTower();
+
+    }
+
+    [ContextMenu("InitGenerateTower")]
+    public void InitGenerateTower()
+    {
+
+        StartCoroutine("GenerateTower");
+
+    }
+
+    public IEnumerator GenerateTower()
+    {
+
+        for (int i = 0; i < towerPieces.Count; i += 1)
+        {
+
+            towerPieces[i].SetActive(true);
+
+            yield return delayBetweenPlacingPiece;
+
+        }
+
+        yield return null;
+
     }
 
     [ContextMenu("DestroyTower")]
-    private void DestroyTower()
+    public void DestroyTower()
     {
 
         StopAllCoroutines();
@@ -77,19 +90,17 @@ public class TowerController : MonoBehaviour
         for (int i = 0; i < towerPieces.Count; i += 1)
         {
 
-            Destroy(towerPieces[i]);
+            towerPieces[i].SetActive(false);
 
         }
-
-        towerPieces.Clear();
 
     }
 
     [ContextMenu("BlowUpTower")]
-    private void BlowUpTower()
+    public void BlowUpTower()
     {
 
-        Vector3 explosionPos = towerPieces[towerPieces.Count / 2].transform.position;
+        Vector3 explosionPos = gameObject.transform.position;
 
         Collider[] colliders = Physics.OverlapSphere(explosionPos, 100f);
 
@@ -101,7 +112,8 @@ public class TowerController : MonoBehaviour
             if (rb != null)
             {
 
-                rb.AddExplosionForce(1000f, explosionPos, 100f);
+                rb.AddExplosionForce(500f, explosionPos, 100f);
+                rb.AddExplosionForce(100f, rb.gameObject.transform.position, 1f);
 
             }
 

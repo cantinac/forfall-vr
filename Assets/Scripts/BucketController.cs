@@ -5,23 +5,20 @@ public class BucketController : MonoBehaviour
 
     [SerializeField] private GameObject[] itemsInBucketPrefabs;
 
-    private void OnTriggerEnter(Collider other)
+    public GameObject GrabItem(Transform transform)
     {
 
-        if (other.gameObject.name.Equals("Hand"))
-        {
+        GameObject item = Instantiate(
+            itemsInBucketPrefabs[Random.Range(0, itemsInBucketPrefabs.Length)],
+            transform.position,
+            transform.rotation
+        );
 
-            GameObject item = Instantiate(
-                itemsInBucketPrefabs[Random.Range(0, itemsInBucketPrefabs.Length)],
-                other.gameObject.transform.position,
-                other.gameObject.transform.rotation
-            );
+        item.GetComponent<Rigidbody>().isKinematic = true;
 
-            item.GetComponent<Rigidbody>().isKinematic = true;
+        item.transform.SetParent(transform);
 
-            item.transform.SetParent(other.gameObject.transform);
-
-        }
+        return item;
 
     }
 
