@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPrefab: {fileID: 2934125341832305661, guid: 0b94b6cc832554c89babcc4522d41d3f,
     type: 3}
-  scaleOfTower: 0.5
+  scaleOfTower: 0.15
   numOfRows: 8
