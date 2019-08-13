@@ -5,6 +5,8 @@ using UnityEngine;
 public class TowerController : MonoBehaviour
 {
 
+    private const float SCALE_SPEED = 0.1f;
+
     private const int NUM_OF_BRICKS_IN_A_ROW = 3;
 
     [SerializeField]
@@ -71,6 +73,19 @@ public class TowerController : MonoBehaviour
     {
 
         gameObject.transform.localScale = Vector3.one * scaleOfTower;
+
+        if (Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0)
+        {
+
+            scaleOfTower += SCALE_SPEED * Time.deltaTime;
+
+        }
+        else if (Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0)
+        {
+
+            scaleOfTower -= SCALE_SPEED * Time.deltaTime;
+
+        }
 
     }
 
