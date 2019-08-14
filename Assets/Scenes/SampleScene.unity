@@ -778,28 +778,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7921329704907332396, guid: d04a31145f2c243d89571e29156de3da,
-        type: 3}
-      propertyPath: scaleOfTower
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d04a31145f2c243d89571e29156de3da, type: 3}
---- !u!1 &7921329703881011821 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7921329704907332435, guid: d04a31145f2c243d89571e29156de3da,
-    type: 3}
-  m_PrefabInstance: {fileID: 7921329703881011820}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7921329703881011822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7921329703881011821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24823af4c44f1469a8fb1b540e02bf65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -4,6 +4,8 @@ using UnityEngine;
 public class TowerControllerInputManager : MonoBehaviour
 {
 
+    private const float SCALE_SPEED = 0.1f;
+
     private TowerController _towerController;
 
     private void Awake()
@@ -24,6 +26,19 @@ public class TowerControllerInputManager : MonoBehaviour
         if (Input.GetButtonDown("Oculus_CrossPlatform_Button_2") || Input.GetButtonDown("Oculus_CrossPlatform_Button_4"))
         {
             _towerController.InitGenerateTower();
+        }
+
+        if (Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0)
+        {
+
+            _towerController.ScaleOfTower += SCALE_SPEED * Time.deltaTime;
+
+        }
+        else if (Input.GetAxisRaw("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0)
+        {
+
+            _towerController.ScaleOfTower -= SCALE_SPEED * Time.deltaTime;
+
         }
 
     }
